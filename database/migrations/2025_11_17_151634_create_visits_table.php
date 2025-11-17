@@ -20,6 +20,7 @@ return new class extends Migration
             //$table->unsignedBigInteger('costumer_id');
             //$table->foreign('costumer_id')->references('id')->on('costumers')->onDelete('cascade');
             $table->string('type');
+            $table->string('status');
             $table->timestamps();
         });
     }

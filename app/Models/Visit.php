@@ -12,6 +12,7 @@ class Visit extends Model
         "address",
         "description",
         //"costumer_id",
-        "type"
+        "type",
+        "status"
     ];
 }
