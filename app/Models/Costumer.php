@@ -11,6 +11,7 @@ class Costumer extends Model
         "email",
         "phone",
         "contracts",
-        "type"
+        "type",
+        "status"
     ];
 }

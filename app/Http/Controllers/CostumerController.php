@@ -35,6 +35,7 @@ class CostumerController extends Controller
             'phone' => 'required|string|max:20',
             'contracts' => 'required|string|max:255',
             'type' => 'required|string|max:100',
+            'status' => 'required|string|max:100',
         ]);
 
         Costumer::create($validated);
@@ -47,7 +48,8 @@ class CostumerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $costumer = Costumer::findOrFail($id);
+        return view('costumers.show', compact('costumer'));
     }
 
     /**
@@ -55,7 +57,8 @@ class CostumerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $costumer = Costumer::findOrFail($id);
+        return view('costumers.edit', compact('costumer'));
     }
 
     /**
@@ -63,7 +66,18 @@ class CostumerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'contracts' => 'required|string|max:255',
+            'type' => 'required|string|max:100',
+            'status' => 'required|string|max:100',
+        ]);
+
+        $costumer = Costumer::findOrFail($id);
+        $costumer->update($validated);
+        return redirect()->route('costumers.index')->with('success', 'Costumer updated successfully.');
     }
 
     /**
@@ -71,6 +85,8 @@ class CostumerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $costumer = Costumer::findOrFail($id);
+        $costumer->delete();
+        return redirect()->route('costumers.index')->with('success', 'Costumer deleted successfully.');
     }
 }
