@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visit extends Model
 {
-    //
+    protected $fillable = [
+        "date",
+        "time",
+        "address",
+        "description",
+        //"costumer_id",
+        "type"
+    ];
 }
