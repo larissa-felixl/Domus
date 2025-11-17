@@ -6,7 +6,7 @@
     <title>Cadastrar um novo contrato</title>
 </head>
 <body>
-    <form action="{{ route('contracts.store') }}" method="POST">
+    <form action="{{ route('contracts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <label for="title">Título:</label>
@@ -28,19 +28,19 @@
         @enderror
         
         <label for="end_date">Data de Fim:</label>
-        <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}" required>
+        <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}">
         @error('end_date')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
         <label for="value">Valor:</label>
-        <input type="text" name="value" id="value" value="{{ old('value') }}" required>
+        <input type="number" name="value" id="value" step="0.01" min="0" value="{{ old('value') }}" required>
         @error('value')
             <p style="color: red;">{{ $message }}</p>
         @enderror
 
          <label for="description">Descrição:</label>
-        <input type="text" name="description" id="description" value="{{ old('description') }}" required>
+        <textarea name="description" id="description" rows="3">{{ old('description') }}</textarea>
         @error('description')
             <p style="color: red;">{{ $message }}</p>
         @enderror

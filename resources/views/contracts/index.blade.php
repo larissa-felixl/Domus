@@ -16,7 +16,8 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Contrato</th>
+                    <th>Título</th>
+                    <th>Arquivo</th>
                     <th>Data de Início</th>
                     <th>Data de Fim</th>
                     <th>Valor</th>
@@ -29,10 +30,15 @@
                 @foreach ($contracts as $contract)
                     <tr>
                         <td>{{ $contract->id }}</td>
-                        <td>{{ $contract->file }}</td>
-                        <td>{{ $contract->start_date }}</td>
-                        <td>{{ $contract->end_date }}</td>
-                        <td>{{ $contract->value }}</td>
+                        <td>{{ $contract->title }}</td>
+                        <td>
+                            <a href="{{ asset('storage/' . $contract->file) }}" target="_blank" style="color: blue; text-decoration: underline;">
+                                📄 Baixar
+                            </a>
+                        </td>
+                        <td>{{ \Carbon\Carbon::parse($contract->start_date)->format('d/m/Y') }}</td>
+                        <td>{{ $contract->end_date ? \Carbon\Carbon::parse($contract->end_date)->format('d/m/Y') : 'Indeterminado' }}</td>
+                        <td>R$ {{ number_format($contract->value, 2, ',', '.') }}</td>
                         <td>{{ $contract->type }}</td>
                         <td>{{ $contract->status }}</td>
                         <td>
