@@ -45,7 +45,7 @@ class ContractController extends Controller
         // Criar o contrato com o caminho do arquivo
         \App\Models\Contract::create([
             'title' => $validated['title'],
-            'file' => $filePath, // Salva o caminho do arquivo
+            'file' => $filePath, 
             'start_date' => $validated['start_date'],
             'end_date' => $validated['end_date'] ?? null,
             'value' => $validated['value'],
@@ -70,7 +70,8 @@ class ContractController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $contract = \App\Models\Contract::findOrFail($id);
+        return view('contracts.edit', compact('contract'));
     }
 
     /**
@@ -78,7 +79,34 @@ class ContractController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $contract = \App\Models\Contract::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:10240', 
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'value' => 'required|numeric|min:0',
+            'type' => 'required|string|max:100',
+            'status' => 'required|string|max:100',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        // Se houver novo arquivo, salvar e substituir
+        if ($request->hasFile('file')) {
+            // Deletar arquivo antigo (opcional, mas recomendado)
+            if ($contract->file && \Storage::disk('public')->exists($contract->file)) {
+                \Storage::disk('public')->delete($contract->file);
+            }
+            
+            // Salvar novo arquivo
+            $validated['file'] = $request->file('file')->store('contracts', 'public');
+        }
+
+        // Atualizar o contrato
+        $contract->update($validated);
+
+        return redirect()->route('contracts.index')->with('success', 'Contract updated successfully.');
     }
 
     /**
@@ -86,6 +114,16 @@ class ContractController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $contract = \App\Models\Contract::findOrFail($id);
+        
+        // Deletar o arquivo físico do storage
+        if ($contract->file && \Storage::disk('public')->exists($contract->file)) {
+            \Storage::disk('public')->delete($contract->file);
+        }
+        
+        // Deletar o registro do banco
+        $contract->delete();
+        
+        return redirect()->route('contracts.index')->with('success', 'Contract deleted successfully.');
     }
 }

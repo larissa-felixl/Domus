@@ -56,7 +56,7 @@
             <p style="color: red;">{{ $message }}</p>
         @enderror
 
-        <label for="status">Status da visita:</label>
+        <label for="status">Status do contrato:</label>
         <select name="status" id="status" required>
             <option value="">Selecione...</option>
             <option value="pendente" {{ old('status') == 'pendente' ? 'selected' : '' }}>Pendente</option>
