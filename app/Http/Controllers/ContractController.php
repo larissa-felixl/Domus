@@ -62,7 +62,9 @@ class ContractController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('contracts.show', [
+            'contract' => \App\Models\Contract::findOrFail($id)
+        ]);
     }
 
     /**
