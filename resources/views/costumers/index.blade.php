@@ -21,6 +21,7 @@
                     <th>Telefone</th>
                     <th>Contratos</th>
                     <th>Tipo</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -33,6 +34,7 @@
                         <td>{{ $costumer->phone }}</td>
                         <td>{{ $costumer->contracts }}</td>
                         <td>{{ $costumer->type }}</td>
+                        <td>{{ $costumer->status }}</td>
                         <td>
                             <a href="{{ route('costumers.show', $costumer->id) }}">Ver</a>
                             <a href="{{ route('costumers.edit', $costumer->id) }}">Editar</a>

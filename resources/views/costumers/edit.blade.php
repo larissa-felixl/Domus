@@ -22,19 +22,15 @@
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
-        <label for="contracts">Contratos:</label>
-        <input type="text" name="contracts" id="contracts" value="{{ old('contracts', $costumer->contracts ) }}" required>
-        @error('contracts')
+        <label for="phone">Telefone:</label>
+        <input type="text" name="phone" id="phone" value="{{ old('phone', $costumer->phone) }}" required>
+        @error('phone')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
-       <label for="status">status do cliente Cliente:</label>
-        <select name="status" id="status" required>
-            <option value="">Selecione...</option>
-            <option value="Ativo" {{ old('status', $costumer->status) == 'Ativo' ? 'selected' : '' }}>Ativo</option>
-            <option value="Inativo" {{ old('status', $costumer->status) == 'Inativo' ? 'selected' : '' }}>Inativo</option>
-        </select>
-        @error('status')
+        <label for="contracts">Contratos:</label>
+        <input type="text" name="contracts" id="contracts" value="{{ old('contracts', $costumer->contracts ) }}" required>
+        @error('contracts')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
@@ -46,6 +42,16 @@
             <option value="Comprador" {{ old('type', $costumer->type) == 'Comprador' ? 'selected' : '' }}>Comprador</option>
         </select>
         @error('type')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
+
+       <label for="status">Status do cliente:</label>
+        <select name="status" id="status" required>
+            <option value="">Selecione...</option>
+            <option value="Ativo" {{ old('status', $costumer->status) == 'Ativo' ? 'selected' : '' }}>Ativo</option>
+            <option value="Inativo" {{ old('status', $costumer->status) == 'Inativo' ? 'selected' : '' }}>Inativo</option>
+        </select>
+        @error('status')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
