@@ -48,7 +48,8 @@ class VisitController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $visit = \App\Models\Visit::findOrFail($id);
+        return view('visit.show', compact('visit'));
     }
 
     /**
@@ -84,6 +85,8 @@ class VisitController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $visit = \App\Models\Visit::findOrFail($id);
+        $visit->delete();
+        return redirect()->route('visits.index')->with('success', 'Visit deleted successfully.');
     }
 }
