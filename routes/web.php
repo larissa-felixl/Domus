@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('properties', App\Http\Controllers\PropertyController::class); //->middleware('auth');
 Route::resource('costumers', App\Http\Controllers\CostumerController::class); //->middleware('auth');
+Route::resource('visits', App\Http\Controllers\VisitController::class); //->middleware('auth');
 
 
 require __DIR__.'/auth.php';

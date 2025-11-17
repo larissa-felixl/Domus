@@ -21,6 +21,8 @@
                     <th>Endereço</th>
                     <th>Descrição</th>
                     <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +34,16 @@
                         <td>{{ $visit->address }}</td>
                         <td>{{ $visit->description }}</td>
                         <td>{{ $visit->type }}</td>
+                        <td>{{ $visit->status }}</td>
+                        <td>
+                            <a href="{{ route('visits.show', $visit->id) }}">Ver</a>
+                            <a href="{{ route('visits.edit', $visit->id) }}">Editar</a>
+                            <form action="{{ route('visits.destroy', $visit->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Tem certeza que deseja deletar essa visita da agenda?')">Deletar</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach 
             </tbody>

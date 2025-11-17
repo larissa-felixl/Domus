@@ -20,7 +20,7 @@ class VisitController extends Controller
      */
     public function create()
     {
-        //
+        return view('visit.create');
     }
 
     /**
@@ -28,7 +28,19 @@ class VisitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'date' => 'required|date',
+            'time' => 'required',
+            'address' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+            //'costumer_id' => 'required|exists:costumers,id',
+            'type' => 'required|string|max:100',
+            'status' => 'required|string|max:100',
+        ]);
+
+        \App\Models\Visit::create($validated);
+
+        return redirect()->route('visits.index')->with('success', 'Visit created successfully.');
     }
 
     /**

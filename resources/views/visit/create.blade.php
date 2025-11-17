@@ -10,13 +10,13 @@
         @csrf
         
         <label for="date">Data:</label>
-        <input type="text" name="date" id="date" value="{{ old('date') }}" required>
+        <input type="date" name="date" id="date" value="{{ old('date') }}" required>
         @error('date')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
         <label for="time">Hora:</label>
-        <input type="text" name="time" id="time" value="{{ old('time') }}" required>
+        <input type="time" name="time" id="time" value="{{ old('time') }}" required>
         @error('time')
             <p style="color: red;">{{ $message }}</p>
         @enderror
@@ -42,6 +42,17 @@
             <option value="Vistoria e documentação" {{ old('type') == 'Vistoria e documentação' ? 'selected' : '' }}>Vistoria e documentação</option>
         </select>
         @error('type')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
+
+        <label for="status">Status da visita:</label>
+        <select name="status" id="status" required>
+            <option value="">Selecione...</option>
+            <option value="Realizada" {{ old('status') == 'Realizada' ? 'selected' : '' }}>Realizada</option>
+            <option value="Pendente" {{ old('status') == 'Pendente' ? 'selected' : '' }}>Pendente</option>
+            <option value="Cancelada" {{ old('status') == 'Cancelada' ? 'selected' : '' }}>Cancelada</option>
+        </select>
+        @error('status')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
