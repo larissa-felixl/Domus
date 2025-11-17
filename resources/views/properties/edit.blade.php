@@ -23,19 +23,19 @@
         @enderror
         
         <label for="type">Tipo:</label>
-        <input type="text" name="type" id="type" value="{{ old('type', ) }}" required>
+        <input type="text" name="type" id="type" value="{{ old('type', $property->type ) }}" required>
         @error('type')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
         <label for="status">Status:</label>
-        <input type="text" name="status" id="status" value="{{ old('status') }}" required>
+        <input type="text" name="status" id="status" value="{{ old('status', $property->status) }}" required>
         @error('status')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
         <label for="owner_name">Nome do Proprietário:</label>
-        <input type="text" name="owner_name" id="owner_name" value="{{ old('owner_name') }}">
+        <input type="text" name="owner_name" id="owner_name" value="{{ old('owner_name', $property->owner_name) }}">
         @error('owner_name')
             <p style="color: red;">{{ $message }}</p>
         @enderror

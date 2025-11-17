@@ -7,39 +7,45 @@
 </head>
 <body>
     <h1>Todos os imóveis</h1>
-    <a href="<?php echo e(route('properties.create')); ?>">Adicionar novo imóvel</a>
+    <a href="{{ route('properties.create') }}">Adicionar novo imóvel</a>
+    
     @if($properties->isEmpty())
         <p>Nenhum imóvel cadastrado</p>
     @else
-        <thead>
-            <tr>
-                <th>ID</th>
-                <Th>Endereço</Th>
-                <th>Preço</th>
-                <th>Status</th>
-                <th>Dono</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($properties as $property)
+        <table border="1">
+            <thead>
                 <tr>
-                    <td>{{ $property->id }}</td>
-                    <td>{{ $property->address }}</td>
-                    <td>{{ $property->price }}</td>
-                    <td>{{ $property->status }}</td>
-                    <td>{{ $property->owner_name }}</td>
-                    <td>
-                        <a href="{{ route('properties.show', $property->id) }}">Ver</a>
-                        <a href="{{ route('properties.edit', $property->id) }}">Editar</a>
-                        <form action="{{ route('properties.destroy', $property->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este imóvel?')">Deletar</button>
-                        </form>
-                    </td>
+                    <th>ID</th>
+                    <th>Endereço</th>
+                    <th>Preço</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Dono</th>
+                    <th>Ações</th>
                 </tr>
-            @endforeach
-        </tbody>
+            </thead>
+            <tbody>
+                @foreach($properties as $property)
+                    <tr>
+                        <td>{{ $property->id }}</td>
+                        <td>{{ $property->adress }}</td>
+                        <td>{{ $property->price }}</td>
+                        <td>{{ $property->type }}</td>
+                        <td>{{ $property->status }}</td>
+                        <td>{{ $property->owner_name }}</td>
+                        <td>
+                            <a href="{{ route('properties.show', $property->id) }}">Ver</a>
+                            <a href="{{ route('properties.edit', $property->id) }}">Editar</a>
+                            <form action="{{ route('properties.destroy', $property->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Tem certeza que deseja deletar este imóvel?')">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     @endif
     
 </body>
