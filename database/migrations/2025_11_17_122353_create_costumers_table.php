@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('contracts')->nullable();
             $table->string('type');
+            $table->string('status');
             $table->timestamps();
         });
     }

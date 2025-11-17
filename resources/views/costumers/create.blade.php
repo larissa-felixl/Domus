@@ -33,6 +33,16 @@
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
+        <label for="status">status do cliente Cliente:</label>
+        <select name="status" id="status" required>
+            <option value="">Selecione...</option>
+            <option value="Ativo" {{ old('status') == 'Ativo' ? 'selected' : '' }}>Ativo</option>
+            <option value="Inativo" {{ old('status') == 'Inativo' ? 'selected' : '' }}>Inativo</option>
+        </select>
+        @error('status')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
+        
         <label for="type">Tipo de Cliente:</label>
         <select name="type" id="type" required>
             <option value="">Selecione...</option>
@@ -43,7 +53,7 @@
         @error('type')
             <p style="color: red;">{{ $message }}</p>
         @enderror
-        
+
         <input type="submit" value="Enviar">
     </form>
 
