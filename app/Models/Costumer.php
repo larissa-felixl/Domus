@@ -10,8 +10,17 @@ class Costumer extends Model
         "name",
         "email",
         "phone",
-        "contracts",
         "type",
         "status"
     ];
+
+    /**
+     * Relacionamento muitos-para-muitos com Contract
+     */
+    public function contractsList()
+    {
+        return $this->belongsToMany(Contract::class)
+                    ->withTimestamps()
+                    ->withPivot('role'); // Inclui o campo 'role' da tabela pivot
+    }
 }

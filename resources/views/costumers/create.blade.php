@@ -27,12 +27,6 @@
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
-        <label for="contracts">Contratos:</label>
-        <input type="text" name="contracts" id="contracts" value="{{ old('contracts') }}" required>
-        @error('contracts')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
-        
         <label for="type">Tipo de Cliente:</label>
         <select name="type" id="type" required>
             <option value="">Selecione...</option>

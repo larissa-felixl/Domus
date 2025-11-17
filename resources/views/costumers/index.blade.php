@@ -19,7 +19,7 @@
                     <th>Nome</th>
                     <th>Email</th>
                     <th>Telefone</th>
-                    <th>Contratos</th>
+                    <th>Qtd. Contratos</th>
                     <th>Tipo</th>
                     <th>Status</th>
                     <th>Ações</th>
@@ -32,7 +32,7 @@
                         <td>{{ $costumer->name }}</td>
                         <td>{{ $costumer->email }}</td>
                         <td>{{ $costumer->phone }}</td>
-                        <td>{{ $costumer->contracts }}</td>
+                        <td>{{ $costumer->contractsList->count() }}</td>
                         <td>{{ $costumer->type }}</td>
                         <td>{{ $costumer->status }}</td>
                         <td>

@@ -12,7 +12,7 @@ class CostumerController extends Controller
      */
     public function index()
     {
-        $costumers = Costumer::orderBy('created_at', 'desc')->get();
+        $costumers = Costumer::with('contractsList')->orderBy('created_at', 'desc')->get();
         return view('costumers.index', compact('costumers'));
     }
 
@@ -33,7 +33,6 @@ class CostumerController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
-            'contracts' => 'required|string|max:255',
             'type' => 'required|string|max:100',
             'status' => 'required|string|max:100',
         ]);
@@ -48,7 +47,7 @@ class CostumerController extends Controller
      */
     public function show(string $id)
     {
-        $costumer = Costumer::findOrFail($id);
+        $costumer = Costumer::with('contractsList')->findOrFail($id);
         return view('costumers.show', compact('costumer'));
     }
 
@@ -70,7 +69,6 @@ class CostumerController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
-            'contracts' => 'required|string|max:255',
             'type' => 'required|string|max:100',
             'status' => 'required|string|max:100',
         ]);
