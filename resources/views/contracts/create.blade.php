@@ -65,7 +65,55 @@
         @error('status')
             <p style="color: red;">{{ $message }}</p>
         @enderror
+
+        <hr style="margin: 20px 0;">
+        <h3>Vincular Clientes ao Contrato</h3>
+        <p style="color: gray; font-size: 12px;">Selecione os clientes e defina o papel de cada um no contrato</p>
         
+        <div id="costumers-container">
+            <div class="costumer-row" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ccc;">
+                <label>Cliente:</label>
+                <select name="costumers[]" style="width: 200px;">
+                    <option value="">Selecione um cliente</option>
+                    @foreach($costumers as $costumer)
+                        <option value="{{ $costumer->id }}">{{ $costumer->name }}</option>
+                    @endforeach
+                </select>
+                
+                <label style="margin-left: 20px;">Papel:</label>
+                <select name="roles[]" style="width: 200px;">
+                    <option value="">Selecione o papel</option>
+                    <option value="Locador">Locador</option>
+                    <option value="Locatário">Locatário</option>
+                    <option value="Comprador">Comprador</option>
+                    <option value="Vendedor">Vendedor</option>
+                    <option value="Fornecedor de Terreno">Fornecedor de Terreno</option>
+                    <option value="Fiador">Fiador</option>
+                    <option value="Testemunha">Testemunha</option>
+                </select>
+                
+                <button type="button" onclick="this.parentElement.remove()" style="background: red; color: white; margin-left: 10px;">Remover</button>
+            </div>
+        </div>
+        
+        <button type="button" onclick="addCostumerRow()" style="background: green; color: white; padding: 10px; margin-bottom: 20px;">
+            + Adicionar outro cliente
+        </button>
+
+        <script>
+            function addCostumerRow() {
+                const container = document.getElementById('costumers-container');
+                const newRow = container.firstElementChild.cloneNode(true);
+                
+                // Limpar valores
+                newRow.querySelector('select').selectedIndex = 0;
+                newRow.querySelector('input').value = '';
+                
+                container.appendChild(newRow);
+            }
+        </script>
+        
+        <br><br>
         <input type="submit" value="Enviar">
     </form>
 

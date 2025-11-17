@@ -51,6 +51,37 @@
            
     </table>
 
+    <br>
+    <h2>Clientes Vinculados a este Contrato</h2>
+    
+    @if($contract->costumers->isEmpty())
+        <p>Nenhum cliente vinculado a este contrato.</p>
+    @else
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Papel no Contrato</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($contract->costumers as $costumer)
+                    <tr>
+                        <td>{{ $costumer->id }}</td>
+                        <td>{{ $costumer->name }}</td>
+                        <td>{{ $costumer->email }}</td>
+                        <td>{{ $costumer->phone }}</td>
+                        <td>{{ $costumer->pivot->role ?? 'Não especificado' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+
+    <br>
     <a href="{{ route('contracts.index') }}">Voltar</a>
     <a href="{{ route('contracts.edit', $contract->id) }}">Editar</a>
 </body>

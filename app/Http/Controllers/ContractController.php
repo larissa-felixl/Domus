@@ -20,7 +20,8 @@ class ContractController extends Controller
      */
     public function create()
     {
-        return view('contracts.create');
+        $costumers = \App\Models\Costumer::orderBy('name')->get();
+        return view('contracts.create', compact('costumers'));
     }
 
     /**
@@ -37,13 +38,17 @@ class ContractController extends Controller
             'type' => 'required|string|max:100',
             'status' => 'required|string|max:100',
             'description' => 'nullable|string|max:500',
+            'costumers' => 'nullable|array',
+            'costumers.*' => 'exists:costumers,id',
+            'roles' => 'nullable|array',
+            'roles.*' => 'nullable|string|max:100',
         ]);
 
         // Salvar o arquivo no storage/app/public/contracts
         $filePath = $request->file('file')->store('contracts', 'public');
 
         // Criar o contrato com o caminho do arquivo
-        \App\Models\Contract::create([
+        $contract = \App\Models\Contract::create([
             'title' => $validated['title'],
             'file' => $filePath, 
             'start_date' => $validated['start_date'],
@@ -54,6 +59,17 @@ class ContractController extends Controller
             'description' => $validated['description'] ?? null,
         ]);
 
+        // Vincular clientes ao contrato
+        if ($request->has('costumers')) {
+            $costumersData = [];
+            foreach ($request->costumers as $index => $costumerId) {
+                $costumersData[$costumerId] = [
+                    'role' => $request->roles[$index] ?? null
+                ];
+            }
+            $contract->costumers()->attach($costumersData);
+        }
+
         return redirect()->route('contracts.index')->with('success', 'Contract created successfully.');
     }
 
@@ -62,9 +78,8 @@ class ContractController extends Controller
      */
     public function show(string $id)
     {
-        return view('contracts.show', [
-            'contract' => \App\Models\Contract::findOrFail($id)
-        ]);
+        $contract = \App\Models\Contract::with('costumers')->findOrFail($id);
+        return view('contracts.show', compact('contract'));
     }
 
     /**
