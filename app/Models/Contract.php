@@ -8,10 +8,10 @@ class Contract extends Model
 {
     protected $fillable = [
         'title',
+        'file',
         'start_date',
         'end_date',
         'value',
-        'file',
         'type',
         'status',
         'description',
