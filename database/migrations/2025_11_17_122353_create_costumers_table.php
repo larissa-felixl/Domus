@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('contracts')->nullable();
-            $table->integer('type');
+            $table->string('type');
             $table->timestamps();
         });
     }

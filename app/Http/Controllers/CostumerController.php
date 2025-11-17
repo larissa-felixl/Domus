@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Costumer;
 use Illuminate\Http\Request;
 
 class CostumerController extends Controller
@@ -11,7 +12,8 @@ class CostumerController extends Controller
      */
     public function index()
     {
-        //
+        $costumers = Costumer::orderBy('created_at', 'desc')->get();
+        return view('costumers.index', compact('costumers'));
     }
 
     /**
@@ -19,7 +21,7 @@ class CostumerController extends Controller
      */
     public function create()
     {
-        //
+        return view ('costumers.create');
     }
 
     /**
@@ -27,7 +29,17 @@ class CostumerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'contracts' => 'required|string|max:255',
+            'type' => 'required|string|max:100',
+        ]);
+
+        Costumer::create($validated);
+
+        return redirect()->route('costumers.index')->with('success', 'Costumer created successfully.');
     }
 
     /**
