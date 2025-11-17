@@ -56,7 +56,8 @@ class VisitController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $visit = \App\Models\Visit::findOrFail($id);
+        return view('visit.edit', compact('visit'));
     }
 
     /**
@@ -64,7 +65,18 @@ class VisitController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'date' => 'required|date',
+            'time' => 'required',
+            'address' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+            //'costumer_id' => 'required|exists:costumers,id',
+            'type' => 'required|string|max:100',
+            'status' => 'required|string|max:100',
+        ]);
+        $visit = \App\Models\Visit::findOrFail($id);
+        $visit->update($validated);
+        return redirect()->route('visits.index')->with('success', 'Visit updated successfully.');
     }
 
     /**
