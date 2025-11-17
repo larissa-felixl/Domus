@@ -40,7 +40,7 @@
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Editar">
     </form>
 
 </body>

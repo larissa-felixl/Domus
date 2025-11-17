@@ -28,19 +28,28 @@
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
-        <label for="status">Status:</label>
-        <input type="text" name="status" id="status" value="{{ old('status', $property->status) }}" required>
+       <label for="status">status do cliente Cliente:</label>
+        <select name="status" id="status" required>
+            <option value="">Selecione...</option>
+            <option value="Ativo" {{ old('status', $costumer->status) == 'Ativo' ? 'selected' : '' }}>Ativo</option>
+            <option value="Inativo" {{ old('status', $costumer->status) == 'Inativo' ? 'selected' : '' }}>Inativo</option>
+        </select>
         @error('status')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
-        <label for="owner_name">Nome do Proprietário:</label>
-        <input type="text" name="owner_name" id="owner_name" value="{{ old('owner_name', $property->owner_name) }}">
-        @error('owner_name')
+        <label for="type">Tipo de Cliente:</label>
+        <select name="type" id="type" required>
+            <option value="">Selecione...</option>
+            <option value="Fornecedor" {{ old('type', $costumer->type) == 'Fornecedor' ? 'selected' : '' }}>Fornecedor</option>
+            <option value="Locatário" {{ old('type', $costumer->type) == 'Locatário' ? 'selected' : '' }}>Locatário</option>
+            <option value="Comprador" {{ old('type', $costumer->type) == 'Comprador' ? 'selected' : '' }}>Comprador</option>
+        </select>
+        @error('type')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Editar">
     </form>
 
 </body>
