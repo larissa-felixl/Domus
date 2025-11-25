@@ -19,7 +19,7 @@
             </ul>
         </nav>
     </header>
-    <div class="m-10 rounded-lg py-3 shadow-sm" style="background-color: #E5E7E9;">
+    <div class="m-7 rounded-lg py-3 shadow-sm" style="background-color: #E5E7E9;">
         <h1 class="m-5 font-semibold text-gray-700">Agenda para o dia de Hoje ({{ date('d/m/Y') }})</h1> 
         <a href="{{ route('visits.index') }}" class="m-10 hover:underline transition text-gray-600">Ver todas as visitas agendadas!</a>
     </div>
@@ -28,7 +28,7 @@
         @if($visits->isEmpty())
             <p style="color: gray; font-style: italic;" class="m-9">Nenhuma visita agendada para hoje.</p>
         @else
-            <div class="grid grid-cols-3 gap-6 m-10">
+            <div class="grid grid-cols-4 gap-6 m-7">
                 @foreach ($visits as $visit)
                     <div class="p-4 rounded-lg shadow-sm border bg-white" style="border-color: #D5D8DC;">
                         <h2 class="text-lg font-bold mb-2 text-gray-700"><strong>Horário:</strong> {{ $visit->time }}</h2>
@@ -43,10 +43,8 @@
             </div>
         @endif
     </div>
-    <div class="m-10 rounded-lg py-2 shadow-sm" style="background-color: #E5E7E9;">
-        <h1 class="m-5 font-semibold text-gray-700"> Visualizar</h1> 
-    </div>
-    <div class="grid grid-cols-3 gap-6 m-10">
+
+    <div class="grid grid-cols-3 gap-6 m-7">
         <div class="bg-white border rounded-lg shadow-sm flex items-center overflow-hidden h-40" style="border-color: #D5D8DC;">
             <div class="w-5 h-full" style="background-color: #8C8A80;"></div>
             <div class="p-6 flex items-center gap-4">
