@@ -17,7 +17,11 @@ class DashboardController extends Controller
         $visits = \App\Models\Visit::whereDate('date', $today)
                                     ->orderBy('time')
                                     ->get();
+
+        $propertiesCount = \App\Models\Property::count();
+        $costumersCount = \App\Models\Costumer::count();
+        $contractsCount = \App\Models\Contract::count();
         
-        return view('dashboard', compact('visits'));
+        return view('dashboard', compact('visits', 'propertiesCount', 'costumersCount', 'contractsCount'));
     }
 }
