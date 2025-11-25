@@ -23,6 +23,7 @@
         <h1 class="m-5 font-semibold text-gray-700">Agenda para o dia de Hoje ({{ date('d/m/Y') }})</h1> 
         <a href="{{ route('visits.index') }}" class="m-5 hover:underline transition text-gray-700">Ver todas as visitas agendadas!</a>
     </div>
+    
     <div>
 
         @if($visits->isEmpty())
