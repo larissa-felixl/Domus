@@ -3,79 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar o contrato {{ $contract->title }}</title>
+    <title>Cadastrar um novo contrato</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-    <form action="{{ route('contracts.update', $contract->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        
-        <label for="title">Título:</label>
-        <input type="text" name="title" id="title" value="{{ old('title', $contract->title) }}" required>
-        @error('title')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
-        
-        <label for="file">Arquivo:</label>
-        <p style="color: gray; font-size: 12px;">
-            Arquivo atual: 
-            <a href="{{ asset('storage/' . $contract->file) }}" target="_blank" style="color: blue;">
-                📄 Ver arquivo atual
-            </a>
-        </p>
-        <p style="color: gray; font-size: 12px;">Deixe em branco para manter o arquivo atual</p>
-        <input type="file" name="file" id="file">
-        @error('file')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
-        
-        <label for="start_date">Data de Início:</label>
-        <input type="date" name="start_date" id="start_date" value="{{ old('start_date', $contract->start_date) }}" required>
-        @error('start_date')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
-        
-        <label for="end_date">Data de Fim:</label>
-        <input type="date" name="end_date" id="end_date" value="{{ old('end_date', $contract->end_date) }}">
-        @error('end_date')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
-        
-        <label for="value">Valor:</label>
-        <input type="number" name="value" id="value" step="0.01" min="0" value="{{ old('value', $contract->value) }}" required>
-        @error('value')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
+<body class="bg-gray-100">
+    <header class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
+        <nav>
+            <ul class="flex gap-4 p-2 rounded px-3 mr-7" >
+                <a href="{{ route('dashboard') }}" class="text-gray-100 hover:text-gray-300 transition">Dashboard</a>
+                <a href="{{ route('visits.index') }}" class="text-gray-100 hover:text-gray-300 transition">Agenda</a>
+                <a href="{{ route('properties.index') }}" class="text-gray-100 hover:text-gray-300 transition">Propriedades</a>
+                <a href="{{ route('costumers.index') }}" class="text-gray-100 hover:text-gray-300 transition">Clientes</a>
+                <a href="{{ route('contracts.index') }}" class="text-gray-100 hover:text-gray-300 transition">Contratos</a>
+                <a href="{{ route('profile.edit') }}" class="text-gray-100 hover:text-gray-300 transition">Perfil</a>
+            </ul>
+        </nav>
+    </header>
+    <div class="m-7 rounded-lg py-3 shadow-sm" style="background-color: #E5E7E9;">
+        <h1 class="m-5 font-bold text-lg text-gray-700">Cadastrar um novo contrato</h1>
+    </div>
 
-         <label for="description">Descrição:</label>
-        <textarea name="description" id="description" rows="3">{{ old('description', $contract->description) }}</textarea>
-        @error('description')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
-        
-        <label for="type">Tipo de contrato:</label>
-        <select name="type" id="type" required>
-            <option value="">Selecione...</option>
-            <option value="compra" {{ old('type', $contract->type) == 'compra' ? 'selected' : '' }}>compra</option>
-            <option value="venda" {{ old('type', $contract->type) == 'venda' ? 'selected' : '' }}>venda</option>
-            <option value="locação" {{ old('type', $contract->type) == 'locação' ? 'selected' : '' }}>locação</option>
-        </select>
-        @error('type')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
+    <div class="m-7">
+        <form action="{{ route('contracts.update', $contract->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-700 mb-6 pb-3">Preencha com as informações do Contrato</h2>
+                
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label for="title" class="block text-sm font-semibold text-gray-600 mb-2">Título</label>
+                        <input type="text" name="title" id="title" value="{{ old('title', $contract->title) }}" required 
+                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        @error('title')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div>
+                        <label for="value" class="block text-sm font-semibold text-gray-600 mb-2">Valor</label>
+                        <input type="number" name="value" id="value" step="0.01" min="0" value="{{ old('value', $contract->value) }}" required
+                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        @error('value')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div>
+                        <label for="start_date" class="block text-sm font-semibold text-gray-600 mb-2">Data de Início</label>
+                        <input type="date" name="start_date" id="start_date" value="{{ old('start_date', $contract) }}" required
+                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        @error('start_date')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div>
+                        <label for="end_date" class="block text-sm font-semibold text-gray-600 mb-2">Data de Fim</label>
+                        <input type="date" name="end_date" id="end_date" value="{{ old('end_date', $contract->end_date) }}"
+                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        @error('end_date')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div>
+                        <label for="type" class="block text-sm font-semibold text-gray-600 mb-2">Tipo de Contrato</label>
+                        <select name="type" id="type" required
+                                class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                            <option value="">Selecione...</option>
+                            <option value="compra" {{ old('type', $contract->type) == 'compra' ? 'selected' : '' }}>Compra</option>
+                            <option value="venda" {{ old('type', $contract->type) == 'venda' ? 'selected' : '' }}>Venda</option>
+                            <option value="locação" {{ old('type', $contract->type) == 'locação' ? 'selected' : '' }}>Locação</option>
+                        </select>
+                        @error('type')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div>
+                        <label for="status" class="block text-sm font-semibold text-gray-600 mb-2">Status</label>
+                        <select name="status" id="status" required
+                                class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                            <option value="">Selecione...</option>
+                            <option value="pendente" {{ old('status', $contract->status) == 'pendente' ? 'selected' : '' }}>Pendente</option>
+                            <option value="finalizado" {{ old('status', $contract->status) == 'finalizado' ? 'selected' : '' }}>Finalizado</option>
+                        </select>
+                        @error('status')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <label for="description" class="block text-sm font-semibold text-gray-600 mb-2">Descrição</label>
+                    <textarea name="description" id="description" rows="3"
+                              class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">{{ old('description', $contract->description) }}</textarea>
+                    @error('description')
+                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                
+                <div class="mt-6">
+                    <label for="file" class="block text-sm font-semibold text-gray-600 mb-2">Arquivo</label>
+                    
+                    @if($contract->file)
+                        <div class="mb-3 p-3 bg-gray-50 border border-gray-300 rounded-lg">
+                            <p class="text-sm text-gray-600 mb-2">Arquivo atual:</p>
+                            <a href="{{ asset('storage/' . $contract->file) }}" target="_blank" class="text-gray-600 hover:text-gray-800 underline transition inline-flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                {{ basename($contract->file) }}
+                            </a>
+                        </div>
+                    @endif
+                    
+                    <p class="text-sm text-gray-500 mb-2">{{ $contract->file ? 'Deixe em branco para manter o arquivo atual ou selecione um novo para substituir' : 'Selecione um arquivo' }}</p>
+                    <input type="file" name="file" id="file"
+                           class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
+                    @error('file')
+                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
 
-        <label for="status">Status do contrato:</label>
-        <select name="status" id="status" required>
-            <option value="">Selecione...</option>
-            <option value="pendente" {{ old('status', $contract->status) == 'pendente' ? 'selected' : '' }}>Pendente</option>
-            <option value="finalizado" {{ old('status', $contract->status) == 'finalizado' ? 'selected' : '' }}>Finalizado</option>
-        </select>
-        @error('status')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
-        
-        <input type="submit" value="Enviar">
-    </form>
+            <!-- Seção: Vincular Clientes -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6" >
+                <h2 class="text-xl font-semibold text-gray-700 mb-6 pb-3 ">Vincular Clientes ao Contrato</h2>
+                <p class="text-gray-700 text-md mb-6">Selecione os clientes e defina o papel de cada um no contrato</p>
+                
+                <div id="costumers-container" class="space-y-4">
+                    @forelse($contract->costumers as $linkedCostumer)
+                        <div class="costumer-row border border-gray-400 rounded-lg p-4 bg-gray-50">
+                            <div class="grid grid-cols-3 gap-4 items-end">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-600 mb-2">Cliente</label>
+                                    <select name="costumers[]" class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                                        <option value="">Selecione um cliente</option>
+                                        @foreach($costumers as $costumer)
+                                            <option value="{{ $costumer->id }}" {{ $costumer->id == $linkedCostumer->id ? 'selected' : '' }}>
+                                                {{ $costumer->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-600 mb-2">Papel</label>
+                                    <select name="roles[]" class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                                        <option value="">Selecione o papel</option>
+                                        <option value="Locador" {{ $linkedCostumer->pivot->role == 'Locador' ? 'selected' : '' }}>Locador</option>
+                                        <option value="Locatário" {{ $linkedCostumer->pivot->role == 'Locatário' ? 'selected' : '' }}>Locatário</option>
+                                        <option value="Comprador" {{ $linkedCostumer->pivot->role == 'Comprador' ? 'selected' : '' }}>Comprador</option>
+                                        <option value="Vendedor" {{ $linkedCostumer->pivot->role == 'Vendedor' ? 'selected' : '' }}>Vendedor</option>
+                                        <option value="Fornecedor de Terreno" {{ $linkedCostumer->pivot->role == 'Fornecedor de Terreno' ? 'selected' : '' }}>Fornecedor de Terreno</option>
+                                        <option value="Fiador" {{ $linkedCostumer->pivot->role == 'Fiador' ? 'selected' : '' }}>Fiador</option>
+                                        <option value="Testemunha" {{ $linkedCostumer->pivot->role == 'Testemunha' ? 'selected' : '' }}>Testemunha</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <button type="button" onclick="this.closest('.costumer-row').remove()" 
+                                            class="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-medium">
+                                        Remover
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="costumer-row border border-gray-400 rounded-lg p-4 bg-gray-50">
+                            <div class="grid grid-cols-3 gap-4 items-end">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-600 mb-2">Cliente</label>
+                                    <select name="costumers[]" class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                                        <option value="">Selecione um cliente</option>
+                                        @foreach($costumers as $costumer)
+                                            <option value="{{ $costumer->id }}">{{ $costumer->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-600 mb-2">Papel</label>
+                                    <select name="roles[]" class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                                        <option value="">Selecione o papel</option>
+                                        <option value="Locador">Locador</option>
+                                        <option value="Locatário">Locatário</option>
+                                        <option value="Comprador">Comprador</option>
+                                        <option value="Vendedor">Vendedor</option>
+                                        <option value="Fornecedor de Terreno">Fornecedor de Terreno</option>
+                                        <option value="Fiador">Fiador</option>
+                                        <option value="Testemunha">Testemunha</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <button type="button" onclick="this.closest('.costumer-row').remove()" 
+                                            class="w-full px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition font-medium">
+                                        Remover
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @endforelse
+                </div>
+                
+                <button type="button" onclick="addCostumerRow()" 
+                        class="mt-4 px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-medium inline-flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Adicionar outro cliente
+                </button>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="flex gap-4">
+                <button type="submit" class="px-8 py-3 rounded-lg shadow-sm text-white font-medium transition" style="background-color: #98A6A1;">
+                    Atualizar Contrato
+                </button>
+                <a href="{{ route('contracts.index') }}" class="px-8 py-3 rounded-lg shadow-sm text-gray-700 hover:text-gray-900 transition font-medium" style="background-color: #E5E7E9;">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function addCostumerRow() {
+            const container = document.getElementById('costumers-container');
+            const firstRow = container.querySelector('.costumer-row');
+            const newRow = firstRow.cloneNode(true);
+            
+            // Limpar valores dos selects
+            newRow.querySelectorAll('select').forEach(select => {
+                select.selectedIndex = 0;
+            });
+            
+            container.appendChild(newRow);
+        }
+    </script>
 
 </body>
 </html>

@@ -20,7 +20,7 @@
         </nav>
     </header>
     <div class="m-7 rounded-lg py-3 shadow-sm" style="background-color: #E5E7E9;">
-        <h1 class="m-5 font-bold text-xl text-gray-700">Detalhes do contrato {{ $contract->title }}</h1>
+        <h1 class="m-5 font-bold text-lg text-gray-700">Detalhes do contrato {{ $contract->title }}</h1>
     </div>
     
     <div class="m-7 grid grid-cols-2 gap-6">

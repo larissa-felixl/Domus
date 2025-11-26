@@ -87,10 +87,12 @@ class ContractController extends Controller
      */
     public function edit(string $id)
     {
-        $contract = \App\Models\Contract::findOrFail($id);
-        return view('contracts.edit', compact('contract'));
+        $contract = \App\Models\Contract::with('costumers')->findOrFail($id);
+        $costumers = \App\Models\Costumer::orderBy('name')->get();
+        return view('contracts.edit', compact('contract', 'costumers'));
     }
 
+    ///view de edit precisa dos dados dos costumers para selecionar/desselecionar
     /**
      * Update the specified resource in storage.
      */
