@@ -27,17 +27,17 @@
         <div class="bg-white rounded-lg shadow-sm p-6">
             <div class="space-y-4">
                 <div class="border-b pb-3">
-                    <span class="text-sm font-semibold text-gray-500">Id</span>
+                    <span class="text-md font-semibold text-gray-700">Id</span>
                     <p class="text-gray-800 mt-1">{{ $contract->id }}</p>
                 </div>
                 
                 <div class="border-b pb-3">
-                    <span class="text-sm font-semibold text-gray-500">Título</span>
+                    <span class="text-md font-semibold text-gray-700">Título</span>
                     <p class="text-gray-800 mt-1">{{ $contract->title }}</p>
                 </div>
                 
                 <div class="border-b pb-3">
-                    <span class="text-sm font-semibold text-gray-500">Arquivo</span>
+                    <span class="text-md font-semibold text-gray-700">Arquivo</span>
                     <a href="{{ asset('storage/' . $contract->file) }}" target="_blank" class="text-gray-600 hover:text-gray-800 underline transition inline-flex items-center gap-1 mt-1">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -47,22 +47,22 @@
                 </div>
                 
                 <div class="border-b pb-3">
-                    <span class="text-sm font-semibold text-gray-500">Data de Início</span>
+                    <span class="text-md font-semibold text-gray-700">Data de Início</span>
                     <p class="text-gray-800 mt-1">{{ \Carbon\Carbon::parse($contract->start_date)->format('d/m/Y') }}</p>
                 </div>
                 
                 <div class="border-b pb-3">
-                    <span class="text-sm font-semibold text-gray-500">Data de fim</span>
+                    <span class="text-md font-semibold text-gray-700">Data de fim</span>
                     <p class="text-gray-800 mt-1">{{ $contract->end_date ? \Carbon\Carbon::parse($contract->end_date)->format('d/m/Y') : 'Indeterminado' }}</p>
                 </div>
                 
                 <div class="border-b pb-3">
-                    <span class="text-sm font-semibold text-gray-500">Tipo de contrato</span>
+                    <span class="text-md font-semibold text-gray-700">Tipo de contrato</span>
                     <p class="text-gray-800 mt-1">{{ $contract->type }}</p>
                 </div>
                 
                 <div class="border-b pb-3">
-                    <span class="text-sm font-semibold text-gray-500">Status</span>
+                    <span class="text-md font-semibold text-gray-700">Status</span>
                     <p class="mt-1">
                         <span class="px-2 py-1 text-xs font-medium rounded-md {{ $contract->status === 'Ativo' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
                             {{ $contract->status }}
