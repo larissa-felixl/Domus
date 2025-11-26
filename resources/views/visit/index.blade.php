@@ -24,28 +24,66 @@
         <a href="{{ route('visits.create') }}" class="m-5 hover:underline transition text-gray-700">Adicionar nova visita à agenda</a>
     </div>
 
-    
-    @if ($visits->isEmpty())
-        <p>Nenhuma visita agendada.</p>
-    @else
-        @foreach ($visits as $visit)
-            <div class="m-7 p-4 rounded-lg shadow-sm border bg-white" style="border-color: #D5D8DC;">
-                <p>Id: {{ $visit->id }}</p>
-                <p>Data: {{ $visit->date }}</p>
-                <p>Horário: {{ $visit->time }}</p>      
-                <p>Endereço: {{ $visit->address }}</p>
-                <p>Descrição: {{ $visit->description }}</p>
-                <p>Tipo: {{ $visit->type }}</p>
-                <p>Status: {{ $visit->status }}</p>
-                <a href="{{ route('visits.show', $visit->id) }}">Ver</a>
-                <a href="{{ route('visits.edit', $visit->id) }}">Editar</a>
-                <form action="{{ route('visits.destroy', $visit->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" onclick="return confirm('Tem certeza que deseja deletar essa visita da agenda?')">Deletar</button>
-                </form>
+    <div class="m-7">
+        @if ($visits->isEmpty())
+            <p class="text-gray-500 italic text-center py-8">Nenhuma visita agendada.</p>
+        @else
+
+            <div class="grid grid-cols-3 gap-6">
+                @foreach ($visits as $visit)
+                    <div class="rounded-lg shadow-sm border bg-white overflow-hidden" style="border-color: #D5D8DC;">
+                        <div class="py-3 px-4 border-b" style="background-color: #E5E7E9; border-color: #D5D8DC;">
+                            <h3 class="font-semibold text-lg text-gray-700">{{ \Carbon\Carbon::parse($visit->date)->format('d/m/Y') }}</h3>
+                        </div>
                         
-        @endforeach  
-    @endif
+                        <div class="p-4 space-y-2">
+                            <div>
+                                <span class="text-md font-semibold text-gray-500">Horário:</span>
+                                <p class="text-gray-800">{{ $visit->time }}</p>
+                            </div>
+                            
+                            <div>
+                                <span class="text-md font-semibold text-gray-500">Endereço:</span>
+                                <p class="text-gray-800 text-sm">{{ $visit->address }}</p>
+                            </div>
+                            
+                            <div>
+                                <span class="text-md font-semibold text-gray-500">Tipo:</span>
+                                <p class="text-gray-800 text-sm">{{ $visit->type }}</p>
+                            </div>
+                            
+                            <div>
+                                <span class="text-md font-semibold text-gray-500">Status:</span>
+                                <span class="px-2 py-1 text-xs font-medium rounded-md {{ $visit->status === 'confirmada' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
+                                    {{ $visit->status }}
+                                </span>
+                            </div>
+                            
+                            @if($visit->description)
+                                <div>
+                                    <span class="text-md font-semibold text-gray-500">Descrição:</span>
+                                    <p class="text-gray-600 text-sm">{{ $visit->description }}</p>
+                                </div>
+                            @endif
+                        </div>
+                        
+                        <!-- Footer com Ações -->
+                        <div class="px-4 py-3 border-t flex gap-3 justify-center" style="border-color: #D5D8DC; background-color: #F9FAFB;">
+                            <a href="{{ route('visits.show', $visit->id) }}" class="text-gray-600 hover:text-gray-800 transition text-sm font-medium">Ver</a>
+                            <a href="{{ route('visits.edit', $visit->id) }}" class="text-gray-600 hover:text-gray-800 transition text-sm font-medium">Editar</a>
+                            <form action="{{ route('visits.destroy', $visit->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Tem certeza que deseja deletar essa visita da agenda?')" 
+                                        class="text-red-600 hover:text-red-800 transition text-sm font-medium">
+                                    Deletar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
 </body>
 </html>
