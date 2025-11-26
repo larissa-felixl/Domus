@@ -28,7 +28,7 @@
             @csrf
             
             <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                <h2 class="text-xl font-semibold text-gray-700 mb-6 pb-3 border-b">Preencha com as informações da Visita</h2>
+                <h2 class="text-xl font-semibold text-gray-700 mb-6 pb-3 ">Preencha com as informações da Visita</h2>
                 
                 <div class="grid grid-cols-2 gap-6">
                     <div>
