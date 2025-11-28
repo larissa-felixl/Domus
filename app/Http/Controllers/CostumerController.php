@@ -35,7 +35,13 @@ class CostumerController extends Controller
             'phone' => 'required|string|max:20',
             'type' => 'required|string|max:100',
             'status' => 'required|string|max:100',
+            'picture' => 'nullable|image|mimes:jpeg,jpg,png,gif,webp|max:5120',
         ]);
+
+        // Upload da imagem
+        if ($request->hasFile('picture')) {
+            $validated['picture'] = $request->file('picture')->store('costumers', 'public');
+        }
 
         Costumer::create($validated);
 
@@ -65,15 +71,27 @@ class CostumerController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $costumer = Costumer::findOrFail($id);
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:20',
             'type' => 'required|string|max:100',
             'status' => 'required|string|max:100',
+            'picture' => 'nullable|image|mimes:jpeg,jpg,png,gif,webp|max:5120',
         ]);
 
-        $costumer = Costumer::findOrFail($id);
+        // Upload de nova imagem
+        if ($request->hasFile('picture')) {
+            // Deletar imagem antiga
+            if ($costumer->picture && \Storage::disk('public')->exists($costumer->picture)) {
+                \Storage::disk('public')->delete($costumer->picture);
+            }
+            
+            $validated['picture'] = $request->file('picture')->store('costumers', 'public');
+        }
+
         $costumer->update($validated);
         return redirect()->route('costumers.index')->with('success', 'Costumer updated successfully.');
     }
@@ -84,6 +102,12 @@ class CostumerController extends Controller
     public function destroy(string $id)
     {
         $costumer = Costumer::findOrFail($id);
+        
+        // Deletar imagem do storage
+        if ($costumer->picture && \Storage::disk('public')->exists($costumer->picture)) {
+            \Storage::disk('public')->delete($costumer->picture);
+        }
+        
         $costumer->delete();
         return redirect()->route('costumers.index')->with('success', 'Costumer deleted successfully.');
     }
