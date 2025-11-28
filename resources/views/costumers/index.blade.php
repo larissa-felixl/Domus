@@ -51,7 +51,11 @@
                                 <td class="px-6 py-4 text-sm text-gray-600">{{ $costumer->phone }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-600">{{ $costumer->contractsList->count() }}</td>
                                 <td class="px-6 py-4 text-sm text-gray-600">{{ $costumer->type }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">{{ $costumer->status }}</td>
+                                <td class="px-6 py-4 text-sm">
+                                    <span class="px-2 py-1 text-xs font-medium rounded-md bg-gray-200 text-gray-800">
+                                        {{ $costumer->status }}
+                                    </span>
+                                </td>
                                 <td class="px-6 py-4 text-sm text-center">
                                     <div  class="flex items-center justify-center gap-3">
                                         <a href="{{ route('costumers.show', $costumer->id) }}" class="text-gray-600 hover:text-gray-800 transition font-medium">Ver</a>
