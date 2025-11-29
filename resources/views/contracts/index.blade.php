@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contratos</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])</head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 h-full flex flex-col">
     <!--criar um filtro por data-->
     <header class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
         <nav>
@@ -19,6 +19,7 @@
             </ul>
         </nav>
     </header>
+    <div class="flex-1">
     <div class="m-7 rounded-lg py-3 shadow-sm" style="background-color: #E5E7E9;">
         <h1 class="m-5 font-bold text-xl text-gray-700">Contratos</h1>
         <a href="{{ route('contracts.create') }}" class="m-5 hover:underline transition text-gray-700">Adicionar novo contrato</a>
@@ -84,5 +85,9 @@
             </div>
         @endif
     </div>
+    </div>
+    <footer class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
+        <p class="text-gray-100">&copy; 2025 Domus Imobiliária. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 h-full flex flex-col">
     <header class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
         <nav>
             <ul class="flex gap-4 p-2 rounded px-3">
@@ -19,6 +19,7 @@
             </ul>
         </nav>
     </header>
+    <div class="flex-1">
     <div class="m-7 rounded-lg py-3 shadow-sm" style="background-color: #E5E7E9;">
         <h1 class="m-5 font-semibold text-gray-700">Agenda para o dia de Hoje ({{ date('d/m/Y') }})</h1> 
         <a href="{{ route('visits.index') }}" class="m-5 hover:underline transition text-gray-700">Ver todas as visitas agendadas!</a>
@@ -82,9 +83,12 @@
                 </svg>
                 <div>
                     <a href="{{ route('properties.index') }}" class="font-bold text-xl transition text-gray-700 hover:text-gray-400">Propriedades</a>
-                </div>
             </div>
         </div>
     </div>
+    </div>
+    <footer class="p-6 shadow-md flex justify-end items-center mt-20" style="background-color: #98A6A1;">
+        <p class="text-gray-100">&copy; 2025 Domus Imobiliária. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
