@@ -11,7 +11,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        $categories = \App\Models\Category::all();
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -31,7 +32,17 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:100',
             'description' => 'nullable|string|max:500',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        
+        $data = $request->all();
+        
+        if ($request->hasFile('picture')) {
+            $data['picture'] = $request->file('picture')->store('categories', 'public');
+        }
+        
+        \App\Models\Category::create($data);
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     /**

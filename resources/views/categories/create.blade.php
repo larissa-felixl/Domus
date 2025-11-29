@@ -29,6 +29,12 @@
         @error('description')
             <p style="color: red;">{{ $message }}</p>
         @enderror
+
+        <label for="picture">Imagem:</label>
+        <input type="file" name="picture" id="picture" value="{{ old('picture') }}">
+        @error('picture')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
         
         <input type="submit" value="Enviar">
 </body>
