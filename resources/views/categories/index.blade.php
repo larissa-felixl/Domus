@@ -15,6 +15,11 @@
                     <h2>{{ $category->name }}</h2>
                     <p><strong>Tipo:</strong> {{ $category->type }}</p>
                     <p><strong>Descrição:</strong> {{ $category->description }}</p>
+                    @if ($category->picture)
+                        <div>
+                            <img src="{{ asset('storage/' . $category->picture) }}" alt="{{ $category->name }}" style="max-width: 200px; height: auto;">
+                        </div>
+                    @endif
                 </div>
             @endforeach
         </div>

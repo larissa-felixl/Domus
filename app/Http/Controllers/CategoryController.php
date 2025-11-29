@@ -35,9 +35,9 @@ class CategoryController extends Controller
             'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         
-        $data = $request->all();
+        $data = $request->except('picture');
         
-        if ($request->hasFile('picture')) {
+        if ($request->hasFile('picture') && $request->file('picture')->isValid()) {
             $data['picture'] = $request->file('picture')->store('categories', 'public');
         }
         
@@ -58,7 +58,9 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('categories.edit', [
+            'category' => \App\Models\Category::findOrFail($id)
+        ]);
     }
 
     /**
@@ -66,7 +68,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'type' => 'required|string|max:100',
+            'description' => 'nullable|string|max:500',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        
+        $category = \App\Models\Category::findOrFail($id);
+        $data = $request->except('picture');
+        
+        if ($request->hasFile('picture') && $request->file('picture')->isValid()) {
+            $data['picture'] = $request->file('picture')->store('categories', 'public');
+        }
+        
+        $category->update($data);
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     /**

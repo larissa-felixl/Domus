@@ -6,7 +6,7 @@
     <title>Categoria - Criar</title>
 </head>
 <body>
-    <form action="{{ route('categories.store') }}" method="POST">
+    <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <label for="name">Nome:</label>
@@ -31,7 +31,7 @@
         @enderror
 
         <label for="picture">Imagem:</label>
-        <input type="file" name="picture" id="picture" value="{{ old('picture') }}">
+        <input type="file" name="picture" id="picture" accept="image/*">
         @error('picture')
             <p style="color: red;">{{ $message }}</p>
         @enderror
