@@ -12,6 +12,12 @@ class property extends Model
         "price",
         "type",
         "status",
+        "category_id",
         "owner_name"
     ];
+    
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

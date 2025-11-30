@@ -50,7 +50,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category = \App\Models\Category::with('properties')->findOrFail($id);
+        return view('categories.show', compact('category'));
     }
 
     /**
@@ -91,6 +92,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = \App\Models\Category::findOrFail($id);
+        $category->delete();
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }

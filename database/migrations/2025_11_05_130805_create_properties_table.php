@@ -17,6 +17,9 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->string('type');
             $table->string('status');
+            
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('set null');
+            
             $table->string('owner_name')->nullable();
             $table->timestamps();
         });

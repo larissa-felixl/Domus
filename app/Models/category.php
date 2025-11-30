@@ -12,4 +12,9 @@ class category extends Model
         'description',
         'picture',
     ];
+    
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
 }

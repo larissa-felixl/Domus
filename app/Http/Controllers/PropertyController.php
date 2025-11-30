@@ -16,7 +16,8 @@ class PropertyController extends Controller
 
     public function create()
     {
-        return view ('properties.create');
+        $categories = \App\Models\Category::all();
+        return view('properties.create', compact('categories'));
     }
 
 
@@ -44,7 +45,8 @@ class PropertyController extends Controller
    
     public function edit(Property $property)
     {
-        return view('properties.edit', compact('property'));
+        $categories = \App\Models\Category::all();
+        return view('properties.edit', compact('property', 'categories'));
     }
 
     /**
@@ -57,6 +59,7 @@ class PropertyController extends Controller
             'price' => 'required|numeric|min:0',
             'type' => 'required|string|max:100',
             'status' => 'required|string|max:100',
+            'category_id' => 'nullable|exists:categories,id',
             'owner_name' => 'nullable|string|max:255',
         ]);
 

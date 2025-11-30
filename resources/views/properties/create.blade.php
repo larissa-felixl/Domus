@@ -33,6 +33,19 @@
             <p style="color: red;">{{ $message }}</p>
         @enderror
         
+        <label for="category_id">Categoria:</label>
+        <select name="category_id" id="category_id">
+            <option value="">Selecione uma categoria</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }} ({{ $category->type }})
+                </option>
+            @endforeach
+        </select>
+        @error('category_id')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
+        
         <label for="owner_name">Nome do Proprietário:</label>
         <input type="text" name="owner_name" id="owner_name" value="{{ old('owner_name') }}">
         @error('owner_name')
