@@ -6,7 +6,7 @@
     <title>Cadastre uma nova propriedade</title>
 </head>
 <body>
-    <form action="{{ route('properties.store') }}" method="POST">
+    <form action="{{ route('properties.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <label for="adress">Endereço:</label>
@@ -28,7 +28,10 @@
         @enderror
         
         <label for="status">Status:</label>
-        <input type="text" name="status" id="status" value="{{ old('status') }}" required>
+        <select name="status" id="status" required>
+            <option value="disponivel" {{ old('status') == 'disponivel' ? 'selected' : '' }}>Disponível</option>
+            <option value="indisponivel" {{ old('status') == 'indisponivel' ? 'selected' : '' }}>Indisponível</option>
+        </select>
         @error('status')
             <p style="color: red;">{{ $message }}</p>
         @enderror
@@ -49,6 +52,12 @@
         <label for="owner_name">Nome do Proprietário:</label>
         <input type="text" name="owner_name" id="owner_name" value="{{ old('owner_name') }}">
         @error('owner_name')
+            <p style="color: red;">{{ $message }}</p>
+        @enderror
+
+        <label for="picture">Foto:</label>
+        <input type="file" name="picture" id="picture" accept="image/*">
+        @error('picture')
             <p style="color: red;">{{ $message }}</p>
         @enderror
         

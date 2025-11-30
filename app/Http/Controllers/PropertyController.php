@@ -28,8 +28,14 @@ class PropertyController extends Controller
             'price' => 'required|numeric|min:0',
             'type' => 'required|string|max:100',
             'status' => 'required|string|max:100',
+            'category_id' => 'nullable|exists:categories,id',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'owner_name' => 'nullable|string|max:255',
         ]);
+
+        if ($request->hasFile('picture') && $request->file('picture')->isValid()) {
+            $validated['picture'] = $request->file('picture')->store('properties', 'public');
+        }
 
         Property::create($validated);
 
@@ -62,6 +68,10 @@ class PropertyController extends Controller
             'category_id' => 'nullable|exists:categories,id',
             'owner_name' => 'nullable|string|max:255',
         ]);
+
+        if ($request->hasFile('picture')) {
+            $validated['picture'] = $request->file('picture')->store('properties', 'public');
+        }
 
         $property->update($validated);
         return redirect()->route('properties.index')->with('success', 'Property updated successfully.');

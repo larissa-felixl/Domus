@@ -12,6 +12,7 @@ class property extends Model
         "price",
         "type",
         "status",
+        "picture",
         "category_id",
         "owner_name"
     ];

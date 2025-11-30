@@ -69,7 +69,6 @@
                             </div>
                         </div>
 
-                        <!-- Foto do cliente -->
                         <div class="flex items-center justify-center">
                             @if($costumer->picture)
                                 <img src="{{ asset('storage/' . $costumer->picture) }}" alt="{{ $costumer->name }}" class="w-50 h-50 object-cover rounded-lg shadow-md">
