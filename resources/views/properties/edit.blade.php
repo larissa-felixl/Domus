@@ -29,10 +29,10 @@
         @enderror
         
         <label for="status">Status:</label>
-        <input type="text" name="status" id="status" value="{{ old('status', $property->status) }}" required>
-        @error('status')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
+        <select name="status" id="status" required>
+            <option value="disponivel" {{ old('status', $property->status) == 'disponivel' ? 'selected' : '' }}>Disponível</option>
+            <option value="indisponivel" {{ old('status', $property->status) == 'indisponivel' ? 'selected' : '' }}>Indisponível</option>
+        </select>
         
         <label for="category_id">Categoria:</label>
         <select name="category_id" id="category_id">
@@ -51,6 +51,12 @@
         <input type="text" name="owner_name" id="owner_name" value="{{ old('owner_name', $property->owner_name) }}">
         @error('owner_name')
             <p style="color: red;">{{ $message }}</p>
+        @enderror
+
+        <label for="picture">Foto:</label>  
+        <input type="file" name="picture" id="picture" accept="image/*">
+        @error('picture')
+            <p style="color: red;">{{ $message }}</p>   
         @enderror
         
         <input type="submit" value="Editar">
