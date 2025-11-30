@@ -67,6 +67,15 @@
         </div>
         </div>
     </div>
+    
+    <div class="m-7 flex gap-3">
+        <a href="{{ route('costumers.edit', $costumer->id) }}" class="px-6 py-2 rounded-lg font-medium text-white transition hover:opacity-90" style="background-color: #98A6A1;">
+            Editar Cliente
+        </a>
+        <a href="{{ route('costumers.index') }}" class="px-6 py-2 rounded-lg font-medium text-gray-700 transition hover:bg-gray-100" style="background-color: #E5E7E9;">
+            Voltar
+        </a>
+    </div>
     </div>
     <footer class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
         <p class="text-gray-100">&copy; 2025 Domus Imobiliária. Todos os direitos reservados.</p>

@@ -72,24 +72,17 @@
                     </div>
                 </div>
                 
-                <!-- Botões de ação -->
-                <div class="flex gap-3 mt-8 pt-6 border-t" style="border-color: #D5D8DC;">
-                    <a href="{{ route('properties.edit', $property->id) }}" class="px-6 py-2 rounded-lg font-medium text-white transition hover:opacity-90" style="background-color: #98A6A1;">
-                        Editar Propriedade
-                    </a>
-                    <a href="{{ route('properties.index') }}" class="px-6 py-2 rounded-lg font-medium text-gray-700 transition hover:bg-gray-100" style="background-color: #E5E7E9;">
-                        Voltar
-                    </a>
-                    <form action="{{ route('properties.destroy', $property->id) }}" method="POST" class="ml-auto" onsubmit="return confirm('Tem certeza que deseja deletar esta propriedade?')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="px-6 py-2 rounded-lg font-medium text-white bg-red-600 hover:bg-red-700 transition">
-                            Deletar
-                        </button>
-                    </form>
-                </div>
             </div>
         </div>
+    </div>
+    
+    <div class="m-7 flex gap-3">
+        <a href="{{ route('properties.edit', $property->id) }}" class="px-6 py-2 rounded-lg font-medium text-white transition hover:opacity-90" style="background-color: #98A6A1;">
+            Editar Propriedade
+        </a>
+        <a href="{{ route('properties.index') }}" class="px-6 py-2 rounded-lg font-medium text-gray-700 transition hover:bg-gray-100" style="background-color: #E5E7E9;">
+            Voltar
+        </a>
     </div>
     </div>
     <footer class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">

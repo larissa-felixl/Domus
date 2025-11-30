@@ -144,9 +144,13 @@
         </div>
     @endif
 
-    <div class="m-7 flex gap-4">
-        <a class="px-6 py-2 rounded-lg shadow-sm text-gray-700 hover:text-gray-900 transition font-medium" style="background-color: #E5E7E9;" href="{{ route('contracts.index') }}">Voltar</a>
-        <a class="px-6 py-2 rounded-lg shadow-sm text-gray-700 hover:text-gray-900 transition font-medium" style="background-color: #E5E7E9;" href="{{ route('contracts.edit', $contract->id) }}">Editar</a>
+    <div class="m-7 flex gap-3">
+        <a href="{{ route('contracts.edit', $contract->id) }}" class="px-6 py-2 rounded-lg font-medium text-white transition hover:opacity-90" style="background-color: #98A6A1;">
+            Editar Contrato
+        </a>
+        <a href="{{ route('contracts.index') }}" class="px-6 py-2 rounded-lg font-medium text-gray-700 transition hover:bg-gray-100" style="background-color: #E5E7E9;">
+            Voltar
+        </a>
     </div>
     </div>
     <footer class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
