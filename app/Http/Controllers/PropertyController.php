@@ -66,10 +66,15 @@ class PropertyController extends Controller
             'type' => 'required|string|max:100',
             'status' => 'required|string|max:100',
             'category_id' => 'nullable|exists:categories,id',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'owner_name' => 'nullable|string|max:255',
         ]);
 
-        if ($request->hasFile('picture')) {
+        if ($request->hasFile('picture') && $request->file('picture')->isValid()) {
+            // Deletar imagem antiga se existir
+            if ($property->picture) {
+                \Storage::disk('public')->delete($property->picture);
+            }
             $validated['picture'] = $request->file('picture')->store('properties', 'public');
         }
 
