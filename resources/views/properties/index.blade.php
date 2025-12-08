@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Imóveis</title>
     @vite(['resources/css/app.css'])    
 </head>
-<body class="bg-gray-100  h-full flex flex-col"> 
+<body class="bg-gray-100 h-full flex flex-col"> 
     <header class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
         <nav>
             <ul class="flex gap-4 p-2 rounded px-3 mr-7" >
@@ -16,7 +16,6 @@
                 <a href="{{ route('properties.index') }}" class="text-gray-100 hover:text-gray-300 transition">Propriedades</a>
                 <a href="{{ route('costumers.index') }}" class="text-gray-100 hover:text-gray-300 transition">Clientes</a>
                 <a href="{{ route('contracts.index') }}" class="text-gray-100 hover:text-gray-300 transition">Contratos</a>
-                <a href="{{ route('profile.edit') }}" class="text-gray-100 hover:text-gray-300 transition">Perfil</a>
             </ul>
         </nav>
     </header>
@@ -79,6 +78,7 @@
     </div>
     @endif
     </div>
+    
     <footer class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
         <p class="text-gray-100">&copy; 2025 Domus Imobiliária. Todos os direitos reservados.</p>
     </footer>

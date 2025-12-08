@@ -16,7 +16,6 @@
                 <a href="{{ route('properties.index') }}" class="text-gray-100 hover:text-gray-300 transition">Propriedades</a>
                 <a href="{{ route('costumers.index') }}" class="text-gray-100 hover:text-gray-300 transition">Clientes</a>
                 <a href="{{ route('contracts.index') }}" class="text-gray-100 hover:text-gray-300 transition">Contratos</a>
-                <a href="{{ route('profile.edit') }}" class="text-gray-100 hover:text-gray-300 transition">Perfil</a>
             </ul>
         </nav>
     </header>
@@ -51,7 +50,7 @@
         <h1 class="m-5 font-semibold text-gray-700">Navegação Rápida</h1>
     </div>
 
-    <div class="grid grid-cols-4 gap-6 m-7">
+    <div class="grid grid-cols-4 gap-6 m-7 mt-10">
         <div class="bg-white border rounded-lg shadow-sm flex items-center overflow-hidden h-40" style="border-color: #D5D8DC;">
             <div class="w-5 h-full" style="background-color: #8C8A80;"></div>
             <div class="p-6 flex items-center gap-4">
@@ -101,7 +100,8 @@
         </div>
     </div>
     </div>
-    <footer class="p-6 shadow-md flex justify-end items-center mt-20" style="background-color: #98A6A1;">
+    
+    <footer class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
         <p class="text-gray-100">&copy; 2025 Domus Imobiliária. Todos os direitos reservados.</p>
     </footer>
 </body>
