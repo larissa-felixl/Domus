@@ -55,7 +55,7 @@
                     <div>
                         <label for="phone" class="block text-sm font-semibold text-gray-600 mb-2">Telefone</label>
                         <input type="text" name="phone" id="phone" value="{{ old('phone', $costumer->phone) }}" required
-                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                               class="phone-input w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition" placeholder="(XX) XXXXX-XXXX">
                         @error('phone')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror

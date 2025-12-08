@@ -44,8 +44,8 @@
                     
                     <div>
                         <label for="time" class="block text-md font-semibold text-gray-600 mb-2">Hora</label>
-                        <input type="time" name="time" id="time" value="{{ old('time') }}" required
-                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        <input type="text" name="time" id="time" value="{{ old('time') }}" required
+                               class="time-input w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition" placeholder="HH:MM">
                         @error('time')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror

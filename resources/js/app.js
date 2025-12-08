@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     initCurrencyMask();
     initDateMask();
+    initPhoneMask();
+    initTimeMask();
 });
 
 // MÁSCARA DE MOEDA
@@ -203,4 +205,130 @@ function parseDate(value) {
     }
     
     return '';
+}
+
+// MÁSCARA DE TELEFONE
+function initPhoneMask() {
+    const phoneInputs = document.querySelectorAll('.phone-input');
+    console.log('Inputs de telefone encontrados:', phoneInputs.length);
+    
+    phoneInputs.forEach(input => {
+        console.log('Aplicando máscara de telefone em:', input.id);
+        
+        // Formatar valor inicial se existir
+        if (input.value && input.value !== '') {
+            input.value = formatPhoneDisplay(input.value);
+        }
+        
+        // Adicionar evento de input
+        input.addEventListener('input', function(e) {
+            let value = e.target.value;
+            
+            // Remove tudo exceto números
+            value = value.replace(/\D/g, '');
+            
+            // Se vazio, limpa o campo
+            if (value === '') {
+                e.target.value = '';
+                return;
+            }
+            
+            // Aplica a máscara (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
+            e.target.value = formatPhoneDisplay(value);
+        });
+    });
+}
+
+// Formata telefone para exibição
+function formatPhoneDisplay(value) {
+    if (!value) return '';
+    
+    // Remove tudo exceto números
+    value = value.replace(/\D/g, '');
+    
+    // Aplica a máscara conforme o tamanho
+    if (value.length <= 2) {
+        return `(${value}`;
+    } else if (value.length <= 6) {
+        return `(${value.slice(0, 2)}) ${value.slice(2)}`;
+    } else if (value.length <= 10) {
+        return `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+    } else {
+        // Celular com 9 dígitos
+        return `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+    }
+}
+
+// MÁSCARA DE HORA
+function initTimeMask() {
+    const timeInputs = document.querySelectorAll('.time-input');
+    console.log('Inputs de hora encontrados:', timeInputs.length);
+    
+    timeInputs.forEach(input => {
+        console.log('Aplicando máscara de hora em:', input.id);
+        
+        // Formatar valor inicial se existir
+        if (input.value && input.value !== '') {
+            input.value = formatTimeDisplay(input.value);
+        }
+        
+        // Adicionar evento de input
+        input.addEventListener('input', function(e) {
+            let value = e.target.value;
+            
+            // Remove tudo exceto números
+            value = value.replace(/\D/g, '');
+            
+            // Se vazio, limpa o campo
+            if (value === '') {
+                e.target.value = '';
+                return;
+            }
+            
+            // Limita a 4 dígitos
+            if (value.length > 4) {
+                value = value.slice(0, 4);
+            }
+            
+            // Aplica a máscara HH:MM
+            if (value.length <= 2) {
+                e.target.value = value;
+            } else {
+                e.target.value = value.slice(0, 2) + ':' + value.slice(2, 4);
+            }
+        });
+        
+        // Validação ao sair do campo
+        input.addEventListener('blur', function(e) {
+            const value = e.target.value;
+            if (value && value.length === 5) {
+                const [hours, minutes] = value.split(':');
+                const h = parseInt(hours);
+                const m = parseInt(minutes);
+                
+                // Valida hora (00-23) e minutos (00-59)
+                if (h > 23 || m > 59) {
+                    alert('Hora inválida! Use o formato HH:MM (00:00 até 23:59)');
+                    e.target.value = '';
+                }
+            }
+        });
+    });
+}
+
+// Formata hora para exibição (HH:MM)
+function formatTimeDisplay(value) {
+    if (!value) return '';
+    
+    // Se já tem :, retorna
+    if (value.includes(':')) return value;
+    
+    // Remove tudo exceto números
+    value = value.replace(/\D/g, '');
+    
+    if (value.length <= 2) {
+        return value;
+    } else {
+        return value.slice(0, 2) + ':' + value.slice(2, 4);
+    }
 }
