@@ -14,8 +14,7 @@
                 <a href="{{ route('categories.index') }}" class="text-gray-100 hover:text-gray-300 transition">Categorias</a>
                 <a href="{{ route('properties.index') }}" class="text-gray-100 hover:text-gray-300 transition">Propriedades</a>
                 <a href="{{ route('costumers.index') }}" class="text-gray-100 hover:text-gray-300 transition">Clientes</a>
-                <a href="{{ route('contracts.index') }}" class="text-gray-100 hover:text-gray-300 transition">Contratos</a>
-            </ul>
+                <a href="{{ route('contracts.index') }}" class="text-gray-100 hover:text-gray-300 transition">Contratos</a><form method="POST" action="{{ route('logout') }}" class="inline ml-4">@csrf<button type="submit" class="text-gray-100 hover:text-gray-300 transition">Sair</button></form></ul>
         </nav>
     </header>
     <div class="flex-1">
@@ -106,3 +105,4 @@
     </footer>
 </body>
 </html>
+
