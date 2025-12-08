@@ -1,26 +1,13 @@
-import './bootstrap';
-import '../css/app.css';
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-
-Alpine.start();
-
-// Inicializar máscara de moeda quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM carregado - inicializando máscaras');
-    
+// Máscara de moeda brasileira para inputs
+export function initCurrencyMask() {
     const currencyInputs = document.querySelectorAll('.currency-input');
-    console.log('Inputs encontrados:', currencyInputs.length);
     
     currencyInputs.forEach(input => {
-        console.log('Aplicando máscara em:', input.id);
-        
         // Formatar valor inicial se existir
         if (input.value && input.value !== '') {
             const numValue = parseFloat(input.value);
             if (!isNaN(numValue)) {
-                input.value = formatCurrency(numValue);
+                input.value = formatCurrencyDisplay(numValue);
             }
         }
         
@@ -41,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             value = (parseInt(value) || 0) / 100;
             
             // Formata como moeda
-            e.target.value = formatCurrency(value);
+            e.target.value = formatCurrencyDisplay(value);
         });
         
         // Antes de submeter o form, converte para formato numérico
@@ -52,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             form.addEventListener('submit', function(e) {
                 currencyInputs.forEach(currInput => {
                     if (currInput.value && currInput.value !== '') {
-                        const numericValue = parseCurrency(currInput.value);
+                        const numericValue = parseCurrencyValue(currInput.value);
                         
                         // Cria input hidden com valor numérico
                         const hiddenInput = document.createElement('input');
@@ -69,10 +56,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
-});
+}
 
 // Formata valor para exibição (R$ 1.234,56)
-function formatCurrency(value) {
+function formatCurrencyDisplay(value) {
     const numValue = typeof value === 'string' ? parseFloat(value) : value;
     
     if (isNaN(numValue)) return 'R$ 0,00';
@@ -86,7 +73,7 @@ function formatCurrency(value) {
 }
 
 // Converte valor formatado de volta para número (1234.56)
-function parseCurrency(value) {
+function parseCurrencyValue(value) {
     if (typeof value !== 'string') return value;
     
     // Remove R$, pontos de milhar e substitui vírgula por ponto

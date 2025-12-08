@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastre uma nova propriedade</title>
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gray-100 h-full flex flex-col">
     <header class="p-6 shadow-md flex justify-end items-center" style="background-color: #98A6A1;">
@@ -44,8 +44,8 @@
                     
                     <div>
                         <label for="price" class="block text-sm font-semibold text-gray-600 mb-2">Preço</label>
-                        <input type="number" name="price" id="price" step="0.01" min="0" value="{{ old('price') }}" required
-                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        <input type="text" name="price" id="price" value="{{ old('price') }}" required
+                               class="currency-input w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition" placeholder="R$ 0,00">
                         @error('price')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror

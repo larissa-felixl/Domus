@@ -45,8 +45,8 @@
                     
                     <div>
                         <label for="value" class="block text-sm font-semibold text-gray-600 mb-2">Valor</label>
-                        <input type="number" name="value" id="value" step="0.01" min="0" value="{{ old('value', $contract->value) }}" required
-                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        <input type="text" name="value" id="value" value="{{ old('value', $contract->value) }}" required
+                               class="currency-input w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition" placeholder="R$ 0,00">
                         @error('value')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
