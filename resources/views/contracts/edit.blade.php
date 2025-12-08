@@ -54,8 +54,8 @@
                     
                     <div>
                         <label for="start_date" class="block text-sm font-semibold text-gray-600 mb-2">Data de Início</label>
-                        <input type="date" name="start_date" id="start_date" value="{{ old('start_date', $contract) }}" required
-                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        <input type="text" name="start_date" id="start_date" value="{{ old('start_date', $contract->start_date) }}" required
+                               class="date-input w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition" placeholder="DD/MM/AAAA">
                         @error('start_date')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -63,8 +63,8 @@
                     
                     <div>
                         <label for="end_date" class="block text-sm font-semibold text-gray-600 mb-2">Data de Fim</label>
-                        <input type="date" name="end_date" id="end_date" value="{{ old('end_date', $contract->end_date) }}"
-                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        <input type="text" name="end_date" id="end_date" value="{{ old('end_date', $contract->end_date) }}"
+                               class="date-input w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition" placeholder="DD/MM/AAAA">
                         @error('end_date')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror

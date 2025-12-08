@@ -36,8 +36,8 @@
                 <div class="grid grid-cols-2 gap-6">
                     <div>
                         <label for="date" class="block text-md font-semibold text-gray-600 mb-2">Data</label>
-                        <input type="date" name="date" id="date" value="{{ old('date', $visit->date) }}" required 
-                               class="w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition">
+                        <input type="text" name="date" id="date" value="{{ old('date', $visit->date) }}" required 
+                               class="date-input w-full px-4 py-2 border border-gray-400 rounded-lg focus:ring-2 focus:ring-gray-400 focus:border-transparent transition" placeholder="DD/MM/AAAA">
                         @error('date')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
