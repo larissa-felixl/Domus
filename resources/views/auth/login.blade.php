@@ -1,55 +1,98 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Domus</title>
+    @vite(['resources/css/app.css'])
+</head>
+<body class="min-h-screen flex items-center justify-center" style="background-color: #98A6A1;">
+    <div class="w-full max-w-md">
+        <!-- Card -->
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-between mt-4">
-            <div class="flex items-center gap-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-                
-                @if (Route::has('register'))
-                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
-                        {{ __('Register') }}
-                    </a>
-                @endif
+         <!-- Logo -->
+            <div class="flex justify-center mb-6">
+                <img src="{{ asset('images/domus.png') }}" alt="Domus Logo" class="h-16">
             </div>
 
-            <x-primary-button>
-                {{ __('Log in') }}
-            </x-primary-button>
+        <div class="rounded-2xl shadow-2xl p-8" style="background-color: #E5E7E9;">
+            <!-- Header -->
+            <div class="mb-8 text-center">
+                <h2 class="text-2xl font-bold" style="color: #98A6A1;">Login</h2>
+            </div>
+
+            <!-- Session Status -->
+            @if (session('status'))
+                <div class="mb-4 text-sm text-green-600">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <!-- Email -->
+                <div class="mb-4">
+                    <input 
+                        id="email" 
+                        type="email" 
+                        name="email" 
+                        value="{{ old('email') }}"
+                        placeholder="E-mail"
+                        required 
+                        autofocus
+                        class="w-full px-4 py-3 bg-white border-0 rounded-lg text-gray-700 placeholder-gray-400 focus:ring-2 focus:outline-none transition shadow-sm"
+                        style="focus:ring-color: #98A6A1;"
+                    />
+                    @error('email')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Password -->
+                <div class="mb-4">
+                    <input 
+                        id="password" 
+                        type="password" 
+                        name="password"
+                        placeholder="Senha"
+                        required
+                        class="w-full px-4 py-3 bg-white border-0 rounded-lg text-gray-700 placeholder-gray-400 focus:ring-2 focus:outline-none transition shadow-sm"
+                    />
+                    @error('password')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Forgot Password -->
+                @if (Route::has('password.request'))
+                    <div class=" mb-6">
+                        <a href="{{ route('password.request') }}" class="text-sm text-gray-600 hover:text-gray-800 transition">
+                            Esqueceu sua senha?
+                        </a>
+                    </div>
+                @endif
+
+                <!-- Login Button -->
+                <button 
+                    type="submit"
+                    class="w-full py-3 text-white font-semibold rounded-lg transition shadow-lg hover:shadow-xl hover:opacity-90"
+                    style="background-color: #98A6A1;"
+                >
+                    Entrar
+                </button>
+
+                <!-- Register Link -->
+                @if (Route::has('register'))
+                    <div class="text-center mt-6">
+                        <span class="text-gray-600 text-sm">Não tem uma conta? </span>
+                        <a href="{{ route('register') }}" class="text-gray-700 hover:text-gray-900 text-sm font-medium transition underline">
+                            Cadastre-se
+                        </a>
+                    </div>
+                @endif
+            </form>
         </div>
-    </form>
-</x-guest-layout>
+    </div>
+</body>
+</html>
